@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Chatbot Flow & FAQ - drg. Winardi Mahendradatta</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="https://unpkg.com/vis-network/styles/vis-network.min.css" rel="stylesheet" />
+  <style>
+    body { font-family: Arial, sans-serif; margin: 16px; background:#f7f9fb; color:#222; }
+    h1 { margin-top: 4px; }
+    #mynetwork { width: 100%; height: 520px; border: 1px solid #ddd; background: white; border-radius: 8px; }
+    .panel { margin-top: 12px; display: flex; gap: 16px; }
+    .box { background: white; padding: 14px; border-radius: 8px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); flex:1; }
+    .small { font-size: 13px; color:#555; }
+    .tag { display:inline-block; background:#e6f7ff; color:#036; padding:6px 10px; border-radius: 20px; margin-right:6px; font-weight:600; }
+    a.btn { display:inline-block; padding:10px 14px; background:#0b76ef; color:white; text-decoration:none; border-radius:8px; margin-top:8px; }
+    table.faq { width:100%; border-collapse: collapse; margin-top:8px; }
+    table.faq td, table.faq th { border: 1px solid #eee; padding:8px 10px; vertical-align:top; }
+    table.faq th { background:#fafafa; text-align:left; }
+    .node-info { white-space:pre-wrap; font-family:monospace; background:#f4f7fb; padding:10px; border-radius:6px; border:1px dashed #dfeaf7; }
+    footer { margin-top:18px; font-size:13px; color:#666; }
+  </style>
+</head>
+<body>
+  <h1>Chatbot Flow & FAQ — <span style="color:#0b76ef">drg. Winardi Mahendradatta</span></h1>
+  <p class="small">Diagram interaktif untuk jadi <strong>acuan FAQ</strong> chatbot. Klik node pada grafik untuk melihat respons/skrip yang direkomendasikan.</p>
+
+  <div id="mynetwork"></div>
+
+  <div class="panel">
+    <div class="box" style="flex:0.55;">
+      <h3>Informasi Klinik (wajib konsisten)</h3>
+      <div class="small">
+        <div><span class="tag">Alamat</span> Jl. Mahendradatta No.678, Padangsambian, Kec. Denpasar Barat, Kota Denpasar, Bali 80119</div>
+        <div><span class="tag">WA / Telp</span> 082229093909</div>
+        <div><span class="tag">Email</span> drgwinardi.mahendradatta@gmail.com</div>
+        <div><span class="tag">Website</span> https://linktr.ee/drgwinardi.mahendradatta</div>
+        <div><span class="tag">Google Maps</span> <a href="https://maps.app.goo.gl/TmkwufaASKw7bxFp6" target="_blank">Lihat di Google Maps</a></div>
+      </div>
+
+      <h4 style="margin-top:12px">Hari & Jam Operasional</h4>
+      <div class="small">
+        <div><span class="tag">Senin</span> 12.00 – 20.00</div>
+        <div><span class="tag">Selasa</span> 12.00 – 20.00</div>
+        <div><span class="tag">Rabu</span> 12.00 – 20.00</div>
+        <div><span class="tag">Kamis</span> 12.00 – 20.00</div>
+        <div><span class="tag">Jumat</span> 12.00 – 20.00</div>
+        <div><span class="tag">Sabtu</span> 12.00 – 20.00</div>
+        <div><span class="tag">Minggu</span> Tutup</div>
+      </div>
+
+      <h4 style="margin-top:12px">Metode Pembayaran</h4>
+      <div class="small">
+        <div><span class="tag">Tunai</span> Cash</div>
+        <div><span class="tag">Transfer Bank</span></div>
+        <div><span class="tag">QRIS</span></div>
+        <div><span class="tag">Cicilan</span> Bisa diangsur menggunakan pihak ketiga 
+          <a href="https://linktr.ee/cicilankesehatan" target="_blank">Carenow.id</a>
+        </div>
+      </div>
+
+      <h4 style="margin-top:12px">Petunjuk singkat</h4>
+      <ol class="small">
+        <li>Gunakan tombol <em>Reservasi</em> untuk mengarahkan ke WhatsApp.</li>
+        <li>Untuk pertanyaan harga — arahkan jawaban ke admin WA dan tidak menyebut angka (default).</li>
+        <li>Perbarui FAQ bila ditemukan pertanyaan baru di logs.</li>
+      </ol>
+    </div>
+
+    <div class="box" style="flex:0.45;">
+      <h3>Node Info (klik node di grafik)</h3>
+      <div id="nodeData" class="node-info">Klik node untuk melihat contoh respons FAQ / skrip chatbot di sini.</div>
+      <a class="btn" id="downloadBtn" href="#">Download HTML ini</a>
+    </div>
+  </div>
+
+  <div class="box" style="margin-top:12px;">
+    <h3>Daftar Layanan Klinik</h3>
+    <div class="small">
+      - Pasang Kawat Gigi (Behel)
+      <br>- Pasang Gigi Palsu (Permanen & Lepas Pasang)
+      <br>- Pasang Gigi Implan
+      <br>- Cabut Gigi Bungsu (Impaksi)
+      <br>- Cabut Gigi
+      <br>- Tambal Gigi
+      <br>- Pembersihan Karang Gigi (Scaling)
+      <br>- Veneer
+      <br>- Bleaching
+    </div>
+  </div>
+
+  <div class="box" style="margin-top:12px;">
+    <h3>FAQ Cepat (Versi yang bisa dipakai chatbot)</h3>
+    <table class="faq">
+      <tr><th>Pertanyaan (intent)</th><th>Jawaban yang disarankan (bot)</th></tr>
+      <tr><td>Apa alamat klinik?</td><td>Halo 👋 Klinik drg. Winardi Mahendradatta beralamat di <strong>Jl. Mahendradatta No.678, Padangsambian, Denpasar Barat, Kota Denpasar, Bali 80119</strong>.<br/>Lihat di Google Maps: https://maps.app.goo.gl/TmkwufaASKw7bxFp6<br/>Hubungi WA: <strong>082229093909</strong></td></tr>
+      <tr><td>Bagaimana cara reservasi?</td><td>Silakan klik tombol <strong>Hubungi WhatsApp</strong> atau chat ke <strong>082229093909</strong> untuk membuat janji/konfirmasi hari & jam. Admin kami akan bantu.</td></tr>
+      <tr><td>Apakah menerima pemasangan behel?</td><td>Tentu, kami menyediakan layanan <strong>pasang behel</strong>. Untuk konsultasi & estimasi biaya, silakan hubungi WA kami di <strong>082229093909</strong>.</td></tr>
+      <tr><td>Apa saja metode pembayaran?</td><td>Kami menerima metode pembayaran: <br/>- Tunai (Cash)<br/>- Transfer Bank<br/>- QRIS<br/>- Cicilan melalui pihak ketiga <a href='https://linktr.ee/cicilankesehatan' target='_blank'>Carenow.id</a><br/><br/>Untuk detail lebih lanjut, hubungi admin via WA <strong>082229093909</strong>.</td></tr>
+      <tr><td>Berapa harga implant / veneer / bleaching?</td><td>Harga tergantung kasus. Mohon hubungi admin kami di 082229093909 untuk estimasi setelah konsultasi singkat atau jadwalkan pemeriksaan langsung.</td></tr>
+      <tr><td>Jam buka klinik?</td><td>Klinik drg. Winardi Mahendradatta buka setiap <br/>Senin - Sabtu pukul <strong>12.00 – 20.00</strong>.<br/>Hari Minggu <strong>Tutup</strong>.<br/>Untuk reservasi silakan hubungi WA: 082229093909.</td></tr>
+    </table>
+  </div>
+
+  <footer>Generated for: Chatbot reference — drg. Winardi Mahendradatta • Created: Interactive HTML</footer>
+
+  <script src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
+  <script>
+    // Nodes & edges (flow)
+    const nodes = new vis.DataSet([
+      { id: 1, label: 'Start', shape:'ellipse' },
+      { id: 2, label: 'Salam Pembuka', shape:'box' },
+      { id: 3, label: 'Menu Utama', shape:'box' },
+      { id:19, label: 'Metode Pembayaran', shape:'box' },
+      { id: 4, label: 'Alamat Klinik', shape:'box' },
+      { id: 5, label: 'Layanan Klinik', shape:'box' },
+      { id: 6, label: 'Reservasi / Hubungi WA', shape:'box' },
+      { id: 7, label: 'Tanya Lainnya', shape:'box' },
+      { id: 8, label: 'Tampilkan Alamat + Google Maps', shape:'box' },
+      { id: 9, label: 'Pasang Behel', shape:'box' },
+      { id:10, label: 'Gigi Palsu', shape:'box' },
+      { id:11, label: 'Implan', shape:'box' },
+      { id:12, label: 'Cabut Gigi Bungsu', shape:'box' },
+      { id:13, label: 'Cabut Gigi', shape:'box' },
+      { id:14, label: 'Tambal Gigi', shape:'box' },
+      { id:15, label: 'Scaling', shape:'box' },
+      { id:16, label: 'Veneer', shape:'box' },
+      { id:17, label: 'Bleaching', shape:'box' },
+      { id:18, label: 'Jawaban Umum + Arahkan ke Admin', shape:'box' }
+    ]);
+
+    const edges = new vis.DataSet([
+      { from:1, to:2 }, { from:2, to:3 },
+      { from:3, to:4 }, { from:3, to:5 }, { from:3, to:6 }, { from:3, to:7 }, { from:3, to:19 },
+      { from:4, to:8 },
+      { from:5, to:9 }, { from:5, to:10 }, { from:5, to:11 }, { from:5, to:12 },
+      { from:5, to:13 }, { from:5, to:14 }, { from:5, to:15 }, { from:5, to:16 }, { from:5, to:17 },
+      { from:6, to:18 }, { from:7, to:18 }
+    ]);
+
+    // Network options
+    const container = document.getElementById('mynetwork');
+    const data = { nodes: nodes, edges: edges };
+    const options = {
+      physics: { stabilization: false },
+      edges: { arrows: { to: {enabled:true, scaleFactor:1} } },
+      nodes: { shape: 'box', margin:10, font:{size:14} },
+      layout: { improvedLayout:true },
+      interaction: { hover:true, navigationButtons:true, keyboard:true }
+    };
+    const network = new vis.Network(container, data, options);
+
+    // Node descriptions / suggested bot replies
+    const nodeDetails = {
+      "Start": "Mulai percakapan. Bot menyapa:\\n\\n\"Halo 👋 Selamat datang di Klinik drg. Winardi Mahendradatta. Ada yang bisa kami bantu hari ini?\"\\n\\nTampilkan menu cepat: Alamat | Layanan | Reservasi | Tanya Lainnya",
+      "Salam Pembuka": "Skrip salam: \\n\"Halo 👋 Selamat datang di Klinik drg. Winardi Mahendradatta. Ada yang bisa kami bantu hari ini?\"",
+      "Menu Utama": "Tampilkan tombol cepat (quick replies):\\n- Alamat Klinik\\n- Layanan Klinik\\n- Reservasi / Hubungi WA\\n- Tanya Lainnya\\n- Metode Pembayaran",
+      "Alamat Klinik": "Jawaban contoh:\\n\"Klinik kami beralamat di Jl. Mahendradatta No.678, Padangsambian, Denpasar Barat, Kota Denpasar, Bali 80119.\\nLihat peta: https://maps.app.goo.gl/TmkwufaASKw7bxFp6\\nUntuk reservasi hubungi WA 082229093909.\"",
+      "Tampilkan Alamat + Google Maps": "Jika pengguna klik, tampilkan peta/tautan dan tombol 'Hubungi via WhatsApp' (082229093909)",
+      "Layanan Klinik": "Tampilkan daftar layanan: Pasang Behel | Gigi Palsu | Implan | Cabut Gigi Bungsu | Cabut Gigi | Tambal Gigi | Scaling | Veneer | Bleaching.\\nSetiap layanan punya skrip pendek dan CTA ke reservasi.",
+      "Pasang Behel": "Skrip: \\n\"Tentu, kami menyediakan layanan pasang kawat gigi (behel). Untuk konsultasi & estimasi biaya, silakan hubungi WA 082229093909 atau jadwalkan kunjungan.\"",
+      "Gigi Palsu": "Skrip: \\n\"Kami menyediakan gigi palsu permanen dan lepasan. Untuk rekomendasi jenis & estimasi biaya, silakan konsultasi ke WA 082229093909.\"",
+      "Implan": "Skrip: \\n\"Layanan implant tersedia. Butuh pemeriksaan untuk rencana perawatan & harga. Hubungi WA 082229093909 untuk jadwal konsultasi.\"",
+      "Cabut Gigi Bungsu": "Skrip: \\n\"Kami menangani cabut gigi bungsu (impaksi). Mohon kirim foto atau langsung datang untuk pemeriksaan. Hubungi WA 082229093909 untuk jadwal.\"",
+      "Cabut Gigi": "Skrip singkat: \\n\"Layanan pencabutan gigi umum tersedia. Hubungi WA 082229093909 untuk info & jadwal.\"",
+      "Tambal Gigi": "Skrip: \\n\"Kami melayani tambal gigi. Untuk estimasi harga dan jadwal, silakan hubungi WA 082229093909.\"",
+      "Scaling": "Skrip: \\n\"Pembersihan karang gigi (scaling) tersedia. Hubungi WA 082229093909 untuk reservasi.\"",
+      "Veneer": "Skrip: \\n\"Layanan veneer untuk estetika tersedia. Perlu konsultasi & foto sebelum estimasi. Hubungi WA 082229093909.\"",
+      "Bleaching": "Skrip: \\n\"Layanan bleaching (pemutihan gigi) tersedia. Hubungi WA 082229093909 untuk jadwal & persyaratan.\"",
+      "Reservasi / Hubungi WA": "Arahkan tombol/link yang langsung membuka chat WhatsApp: https://wa.me/6282229093909 (format internasional)\\nSkrip tindakan: 'Silakan klik untuk menghubungi admin via WhatsApp'",
+      "Tanya Lainnya": "Jika bot tidak memahami, gunakan fallback:\\n\"Maaf, saya belum bisa membantu hal itu. Silakan hubungi admin kami di WA 082229093909 supaya bisa dibantu lebih lanjut.\"",
+      "Jawaban Umum + Arahkan ke Admin": "Fallback/respon umum untuk pertanyaan kompleks: \\n\"Untuk informasi lebih lengkap, mohon hubungi admin via WhatsApp 082229093909 atau email drgwinardi.mahendradatta@gmail.com\"",
+      "Metode Pembayaran": "Kami menerima metode pembayaran: \\n- Tunai (Cash)\\n- Transfer Bank\\n- QRIS\\n- Cicilan melalui pihak ketiga Carenow.id (https://linktr.ee/cicilankesehatan).\\n\\nUntuk detail, silakan hubungi admin via WA 082229093909."
+    };
+
+    // When user clicks a node, show the details in the right panel
+    network.on("click", function (params) {
+      if (params.nodes.length) {
+        const nodeId = params.nodes[0];
+        const node = nodes.get(nodeId);
+        const key = node.label;
+        const info = nodeDetails[key] || "Tidak ada detail untuk node ini.";
+        document.getElementById('nodeData').innerText = info;
+      }
+    });
+
+    // Download self-contained HTML (this file)
+    document.getElementById('downloadBtn').addEventListener('click', function(e){
+      e.preventDefault();
+      const blob = new Blob([document.documentElement.outerHTML], {type: 'text/html'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'Chatbot_Flow_drg_Winardi_Final.html';
+      a.click();
+      URL.revokeObjectURL(url);
+    });
+  </script>
+</body>
+</html>
